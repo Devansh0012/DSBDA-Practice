@@ -3,7 +3,7 @@ sudo su hduser
 
 password: student
 
-cd usr/local/hive
+cd /usr/local/hive
 
 # Start Hadoop daemons in the background.
 
@@ -11,6 +11,11 @@ start-dfs.sh
 
 start-yarn.sh
 
+cd bin
+
+jps
+
+./hive
 
 #create a database and use it
 
