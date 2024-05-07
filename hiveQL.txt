@@ -1,0 +1,50 @@
+commands:
+sudo su hduser
+
+password: student
+
+cd usr/local/hive
+
+# Start Hadoop daemons in the background.
+
+start-dfs.sh
+
+start-yarn.sh
+
+
+#create a database and use it
+
+hive-> "CREATE DATABASE mydb;"
+
+hive-> "USE mydb;"
+
+#create table in hive
+hive-> "CREATE TABLE students (id int, name string, age int);"
+
+#Load data from file in table
+hive-> "LOAD DATA LOCAL INPATH '/home/hduser/students.txt' overwrite INTO TABLE students;"
+
+#show tables in current DATABASE
+hive-> "SHOW TABLES;"
+
+#describe the structure of the table
+hive-> "DESCRIBE students;"
+
+#select records from the table
+hive-> "SELECT * FROM students;
+
+#alter table in hive
+hive-> "ALTER TABLE students ADD COLUMN email string;"  #add column to existing table
+
+hive-> "ALTER TABLE students DROP COLUMN age;"          #delete column from existing table
+
+#insert new record into the table
+hive-> "INSERT INTO TABLE students VALUES(102,'John',35,'john@gmail.com');"
+
+#update existing record in the table
+hive-> "UPDATE students SET name='Jane' WHERE id=102;"
+
+#querying with join operation
+hive-> "SELECT s.name, c.city FROM students s JOIN cities c ON(s.age = c.population);"
+
+
