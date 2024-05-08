@@ -176,3 +176,58 @@ hive> CREATE INDEX origin_index ON TABLE flight_data (origin) AS
     > 'COMPACT' WITH DEFERRED REBUILD;
 OK
 Time taken: 0.388 seconds
+
+
+
+
+#HIVE MAIN
+ 
+commands:
+sudo su hduser
+
+password: student
+
+cd /usr/local/hive
+
+# Start Hadoop daemons in the background.
+
+start-dfs.sh
+
+start-yarn.sh
+
+cd bin
+
+jps
+
+./hive
+
+hive-> create database folder;
+hive-> use folder;
+hive-> create table flight(fno int, source varchar(18),year int, delay float)
+   -> row format DELIMITED
+   -> fields terminated by ","
+   -> lines terminated by '\n'
+   -> stored as textfile;
+
+hive-> insert into flight values(215,"pune",2024,15.00);
+hive-> add more data in the table;
+
+hive-> select * from flight;
+hive-> load data local inpath "path of file"
+   -> overwrite into table flight;
+
+hive-> select * from flight;
+
+hive-> create table nflight(fno int, dest varchar(10), year int)
+   -> row format DELIMITED
+   -> fields terminated by ","
+   -> lines terminated by "\n";
+   -> stored as textfile;
+
+hive-> insert into nflight values(225,'mumbai',2024);
+hive-> select * from nflight;
+hive-> add more data;
+
+hive-> select a.fno, a.source, a.year, b.dest
+   -> from flight a join nflight b
+   -> on a.fno=b.fno;
